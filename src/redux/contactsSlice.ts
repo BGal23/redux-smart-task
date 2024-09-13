@@ -32,10 +32,18 @@ const contactsSlice = createSlice({
     builder
       .addCase(
         fetchContacts.fulfilled,
-        (state, action: PayloadAction<Contacts[]>) => {
+        (state, action: PayloadAction<UserAPI[]>) => {
           state.isLoading = false;
           state.error = null;
-          state.items = action.payload;
+          state.items = action.payload.map(
+            ({ id, name, username, email, phone }) => ({
+              id,
+              name,
+              username,
+              email,
+              phone,
+            })
+          );
         }
       )
 
