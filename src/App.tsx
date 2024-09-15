@@ -3,12 +3,12 @@ import Filters from "./components/Filters/Filters";
 import UsersTable from "./components/UsersTable/UsersTable";
 import { useEffect } from "react";
 import { fetchContacts } from "./redux/operations";
-import { selectIsLoading } from "./redux/selectors";
 import { AppDispatch } from "./redux/store";
+import { Alert, Container } from "@mui/material";
+import { selectError } from "./redux/selectors";
 
 const App = () => {
-  const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
+  const error = useSelector(selectError);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -16,11 +16,15 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <>
-      {isLoading && "Loading..."}
+    <Container>
+      {typeof error === "string" && error! && (
+        <Alert severity="error" sx={{ maxWidth: 710 }}>
+          {error}
+        </Alert>
+      )}
       <Filters />
       <UsersTable />
-    </>
+    </Container>
   );
 };
 

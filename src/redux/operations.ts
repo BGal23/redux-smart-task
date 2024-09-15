@@ -9,8 +9,11 @@ export const fetchContacts = createAsyncThunk(
     try {
       const res = await axios.get("/users");
       return res.data;
-    } catch (error: unknown) {
-      return thunkAPI.rejectWithValue(error);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
     }
   }
 );

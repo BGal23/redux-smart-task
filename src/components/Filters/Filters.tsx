@@ -14,7 +14,7 @@ const Filters = () => {
     <>
       <Box
         component="form"
-        sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+        sx={{ margin: "1rem 0 2rem" }}
         noValidate
         autoComplete="off"
       >

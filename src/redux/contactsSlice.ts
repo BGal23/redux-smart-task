@@ -1,7 +1,7 @@
 import { createSlice, Action, PayloadAction } from "@reduxjs/toolkit";
 import { fetchContacts } from "./operations";
 import { Contacts } from "../types/redux";
-import { UserAPI } from "../types/api";
+import { User } from "../types/user";
 
 const handlePending = (state: Contacts) => {
   state.isLoading = true;
@@ -23,7 +23,7 @@ const isRejectAction = (action: Action) => {
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
-    items: [] as UserAPI[],
+    items: [] as User[],
     isLoading: false as boolean,
     error: null as unknown,
   },
@@ -32,7 +32,7 @@ const contactsSlice = createSlice({
     builder
       .addCase(
         fetchContacts.fulfilled,
-        (state, action: PayloadAction<UserAPI[]>) => {
+        (state, action: PayloadAction<User[]>) => {
           state.isLoading = false;
           state.error = null;
           state.items = action.payload.map(
@@ -50,7 +50,7 @@ const contactsSlice = createSlice({
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
       .addDefaultCase((state) => {
-        state.error = "someone used an old function, fix it!";
+        state.error = "An unknown error occurred";
       });
   },
 });

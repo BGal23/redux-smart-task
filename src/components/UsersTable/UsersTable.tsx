@@ -1,34 +1,37 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
-import { selectFilteredContacts } from "../../redux/selectors";
-import UserTableElement from "../UserTableElement/UserTableElement";
+import { selectFilteredContacts, selectIsLoading } from "../../redux/selectors";
+import { Paper } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 const UsersTable = () => {
   const filter = useSelector(selectFilteredContacts);
+  const isLoading = useSelector(selectIsLoading);
 
-  const usersList = filter.map((contact) => (
-    <UserTableElement key={contact.id} userData={contact} />
-  ));
+  const columns: GridColDef[] = [
+    { field: "name", headerName: "Name", width: 190 },
+    { field: "username", headerName: "User Name", width: 160 },
+    { field: "email", headerName: "Email", width: 210 },
+    { field: "phone", headerName: "Phone", width: 180 },
+  ];
 
   return (
-    <TableContainer>
-      <Table sx={{ minWidth: 320 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">User Name</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Phone</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{usersList}</TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Paper sx={{ width: 740 }}>
+        <DataGrid
+          rows={filter}
+          columns={columns}
+          sx={{ border: 0, width: 740.1 }}
+          autoHeight={true}
+          hideFooter={true}
+          loading={isLoading}
+          showCellVerticalBorder={true}
+          showColumnVerticalBorder={true}
+          localeText={{
+            noRowsLabel: "No results found.",
+          }}
+        />
+      </Paper>
+    </>
   );
 };
 

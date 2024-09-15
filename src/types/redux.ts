@@ -1,4 +1,4 @@
-import { UserAPI } from "./api";
+import { User } from "./user";
 
 export interface State {
   contacts: Contacts;
@@ -6,7 +6,7 @@ export interface State {
 }
 
 export interface Contacts {
-  items: UserAPI[];
+  items: User[];
   isLoading: boolean;
   error: unknown;
 }
