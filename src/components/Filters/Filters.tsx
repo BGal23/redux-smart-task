@@ -14,7 +14,11 @@ const Filters = () => {
     <>
       <Box
         component="form"
-        sx={{ margin: "1rem 0 2rem" }}
+        sx={{
+          margin: "1rem 0 2rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
         noValidate
         autoComplete="off"
       >
