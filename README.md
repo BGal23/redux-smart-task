@@ -5,5 +5,5 @@ https://bgal23.github.io/redux-smart-task/
 
 Or run it on your own computer:
 - Download the repository.
-- Run the development server <code>npm run dev<code/>.
+- Run the development server <code>npm run dev<code/>
 - Open http://localhost:5173/redux-smart-task
